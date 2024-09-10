@@ -11,43 +11,56 @@ Desktop CRUD App Written In C#(.NET Framework)
 ### Bulit With
 - C#(.Net Framework)
 - Microsoft Sql
-- VS Code
+- Visual Studio 2022
  
  
 ## Features
  
-- Insert Data
-- Delete Data
+- Add Data
 - Update Data
-- Search Data
+- Delete Data
+- Clear Data
+- Empty table Data
  
  
 ## SQL Query
 #### Design Table
 ```bash
-  CREATE TABLE [dbo].[CATable] (
-    [id]   INT          NOT NULL,
-    [name] VARCHAR (50) NULL,
-    [age]  FLOAT (53)   NULL,
-    CONSTRAINT [PK_CATable] PRIMARY KEY CLUSTERED ([id] ASC)
+CREATE TABLE [dbo].[Contact] (
+    [Contact ID] INT           NOT NULL,
+    [First Name] NVARCHAR (50) NOT NULL,
+    [Last Name]  NVARCHAR (50) NOT NULL,
+    [Contact No] NVARCHAR (50) NOT NULL,
+    [Gender]     NVARCHAR (10) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Contact ID] ASC)
 );
 ```
-#### Insert Data
+#### Add Data
 ```bash
-INSERT INTO CATable(id, name, age) VALUES(@id, @name, @age)
+"INSERT INTO Contact ([Contact ID], [First Name], [Gender], [Last Name], [Contact No]) " +
+                "VALUES ('" + ContactIdTb.Text + "', '" + FirstNameTb.Text + "', '" + GenderCb.SelectedItem.ToString() + "', '" + LastNameTb.Text + "', '" + ContactNoTb.Text + "')";
+
+```
+#### Updata Data
+```bash
+"UPDATE Contact SET [First Name] = '" + FirstNameTb.Text + "', [Last Name] = '" + LastNameTb.Text + "', [Contact No] = '" + ContactNoTb.Text + "', [Gender] = '" + GenderCb.SelectedItem.ToString() + "' WHERE [Contact ID] = '" + ContactIdTb.Text + "'";
+
 ```
 #### Delete Data
 ```bash
-DELETE CATable WHERE id=@id
+"DELETE FROM Contact WHERE [Contact ID] = '" + ContactIdTb.Text + "'";
+
 ```
-#### Update Data
+#### Clear Data
 ```bash
-UPDATE CATable SET name=@name, age=@age WHERE id=@id
+ContactIdTb.Clear();
+FirstNameTb.Clear();
+  LastNameTb.Clear();
+  ContactNoTb.Clear();
+  GenderCb.SelectedIndex = -1;
 ```
-#### Search Data
-```bash
-SELECT * FROM CATable WHERE id=@id
-```
+#### Empty table Data
+"DELETE FROM Contact";
 ## Tech Stack
  
 **Programming Language:** C# <br><br>
